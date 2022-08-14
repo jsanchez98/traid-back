@@ -1,4 +1,4 @@
-package app;
+package app.exception;
 
 public class TraderNotFoundException extends RuntimeException {
     public TraderNotFoundException(Long id){

@@ -2,7 +2,7 @@ package app.controller;
 
 import app.TraderDTO;
 import app.TraderModelAssembler;
-import app.TraderNotFoundException;
+import app.exception.TraderNotFoundException;
 import app.model.Trader;
 import app.repository.TraderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
