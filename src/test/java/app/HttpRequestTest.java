@@ -21,4 +21,10 @@ public class HttpRequestTest {
     public void greetingShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("Hello");
     }
+
+    @Test
+    public void getTimeseriesReturnsArray() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/AAPL/timeseries", String.class))
+                .contains();
+    }
 }

@@ -4,6 +4,7 @@ import app.model.DataPoint;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,10 @@ import java.util.List;
 public class PolygonResponse {
 
     @Column(unique=true)
-    private @Id String ticker;
+    private @Id @GeneratedValue Long id;
+
+    @Column(unique=true)
+    private String ticker;
 
     @Column(name="adjusted")
     private boolean adjusted;
@@ -21,8 +25,7 @@ public class PolygonResponse {
     @Column(name="queryCount")
     private int queryCount;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="polygon_id")
+    @OneToMany(mappedBy="polygonResponse", fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DataPoint> results = new ArrayList<>();
 
     @Column(name="resultsCount")
@@ -30,6 +33,11 @@ public class PolygonResponse {
 
     @Column(name="status")
     private String status;
+
+    public void addDataPoint(DataPoint dataPoint){
+        this.results.add(dataPoint);
+        dataPoint.setPolygonResponse(this);
+    }
 
     public PolygonResponse() {
     }

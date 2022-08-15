@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface PolygonRepository extends CrudRepository<PolygonResponse, Long> {
     PolygonResponse findByTicker(String ticker);
+    boolean existsPolygonResponseByTicker(String ticker);
 }

@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -9,15 +10,21 @@ import javax.persistence.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataPoint {
 
+    @Column(unique=true)
+    @JsonIgnore
+    private @Id @GeneratedValue Long id;
     private int c;
     private int h;
     private int l;
     private int n;
     private int o;
-    @Id
     private Long t;
     private Long v;
     private int vw;
+    @ManyToOne
+    @JoinColumn(name="polygon_id", nullable=false)
+    @JsonIgnore
+    private PolygonResponse polygonResponse;
 
     public DataPoint(){}
 
@@ -83,5 +90,13 @@ public class DataPoint {
 
     public void setVw(int vw) {
         this.vw = vw;
+    }
+
+    public PolygonResponse getPolygonResponse() {
+        return polygonResponse;
+    }
+
+    public void setPolygonResponse(PolygonResponse polygonResponse) {
+        this.polygonResponse = polygonResponse;
     }
 }
